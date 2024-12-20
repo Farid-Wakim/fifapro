@@ -1,18 +1,33 @@
-	.landing-player{
-  -webkit-filter: drop-shadow(1px 1px 0 black)
-                  drop-shadow(-1px -1px 0 black);
-  filter: drop-shadow(1px 1px 0 black) 
-          drop-shadow(-1px -1px 0 red);
-
-
-	}
+@font-face {
+  font-family: fifafont;
+  src: url(./resources/fonts/EASPORTS15.ttf);
+}
+h1,h2,h3,.title{
+  font-family: fifafont;
+}
 body{
-  background-image: url("resources/background-football.jpg");
+  background-image: url("resources/images/background-football.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   color:white;
 }
 .features , .signup{
-  background-color: white;
-  color:black;
+  background-color: rgb(61, 2, 235);
+  color:white;
+}
+
+.features>h1 , .signup>h1{
+  color:rgb(230, 1, 125);
+
+}
+.font-pink{
+  color:rgb(230, 1, 125);
+}
+.btn-pink{
+background-color: rgb(230, 1, 125);
+color:white;
+}
+.btn-outline-pink{
+border-color: rgb(230, 1, 125);
+color:rgb(230, 1, 125);
 }
