@@ -7,7 +7,7 @@ h1,h2,h3,.title{
 }
 body{
   background-image: url("resources/images/background-football.jpg");
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-attachment: fixed;
   color:white;
 }
@@ -30,4 +30,7 @@ color:white;
 .btn-outline-pink{
 border-color: rgb(230, 1, 125);
 color:rgb(230, 1, 125);
+}
+.bg-pink{
+  background-color: rgb(230, 1, 125);
 }
