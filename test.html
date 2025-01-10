@@ -1,0 +1,220 @@
+<html>
+  <head>
+    <title>FORMATION GRID </title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type='text/javascript' src='js/lapangan.js'></script>
+    <link type='text/css' rel='stylesheet' href='css/lapangan.css'></link>
+<style>
+    body{
+  background: url('http://farm8.staticflickr.com/7084/7394608868_d53c27bb4e.jpg');
+  font-family: verdana;
+}
+#sidebar{
+  background: white;
+  width:  200px;
+  height: 780px;  
+  float:  left;
+  border-right: 5px solid #9CD87B;
+}
+ul#list{
+  list-style: none;
+  padding-left: 0;
+}
+
+ul#list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;  
+}
+
+ul#list li:hover{
+  color: white;
+background: #ffb76b; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffb76b 0%, #ffa73d 50%, #ff7c00 51%, #ff7f04 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffb76b), color-stop(50%,#ffa73d), color-stop(51%,#ff7c00), color-stop(100%,#ff7f04)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ff7f04',GradientType=0 ); /* IE6-9 */
+
+} 
+
+.wrapper{
+  width:  595px;
+  height: 780px;
+  border: 5px solid #9CD87B;
+}
+#ground{
+  width:  390px;
+  height: 780px; 
+  float:  left
+}
+.box:hover{
+  background-color: #4F7C22;
+  cursor: pointer; 
+}
+
+.box:hover div, .box.hovered div{
+  background-color: red; 
+}
+.box.active{
+  background-color: #A71B42;
+}
+.box{
+  width:  13px;
+  height: 13px;
+  float:  left;
+  border: 1px dotted #5DA379;
+  position: relative;
+}
+.box div{
+  position: absolute;
+  width: 30px;
+  height: 24px;
+  border: 1px solid #eee;
+  border-radius: 50;
+  background: green;
+  z-index: 999;
+  text-align: center;
+  top: -10px;
+  left: -10px;
+  padding-top: 6px;
+  color: white;
+}
+.half_ground{
+  height: 390px;
+  width:  390px;
+}
+.half_ground.v{
+  background-image: url('../images/bg-ground-v.png')
+}
+.half_ground.h{
+  background-image: url('../images/bg-ground-h.png')
+}
+</style>  
+</head>
+
+  <body>
+  <div class='wrapper'>
+    <div id='sidebar'>
+      <button onclick="toYaml()">to YAML</button>
+      <button onclick="clearActive()">clear</button>
+      <span id="coordinat">X,Y</span>
+      <ul id='list'>
+      </ul>
+    </div>
+    <div id='ground'>      
+      <div class='half_ground v'></div>
+      <div class='half_ground h'></div>
+    </div>
+  </div>
+  <script>
+
+$(document).ready(function(){
+  initGround();
+  clickableBox();
+  hoverable();
+  $( "ul#list" ).sortable({
+    update: function(e, ui){
+      reInitializePosititionNumber();
+    }
+  });
+})
+
+function initGround(){
+  vertical = ["va", "vb", "vc", "vd", "ve", "vf", "vg", "vh", "vi", "vj", "vk", "vl", "vm", "vn", "vo", "vp", "vq", "vr", "vs", "vt", "vu", "vv", "vw", "vx", "vy", "vz"]
+  horizontal = ["ha", "hb", "hc", "hd", "he", "hf", "hg", "hh", "hi", "hj", "hk", "hl", "hm", "hn", "ho", "hp", "hq", "hr", "hs", "ht", "hu", "hv", "hw", "hx", "hy", "hz"]
+  loopGrid(vertical, "v")
+  loopGrid(horizontal, "h")
+};
+
+function loopGrid(arr, kind){
+  clear  = '<div style="clear:both">'
+  $.each(arr, function(idx, coor){
+    $.each(arr, function(vertical_idx, coor){
+      if(kind=="v"){
+        index = idx+1
+      }else{
+        index = Math.abs(idx-26)
+      }
+      id  = arr[vertical_idx] +'-'+ index
+      box = '<div class="box" id="'+id+'">'
+      $('.half_ground.'+kind+'').append(box)
+    })
+  })
+};
+
+function clickableBox(){
+  $('.box').on('click',function(){
+    active_box = $('.box.active').length + 1
+    id = $(this).attr('id')
+    if(active_box <= 12){
+      if($(this).hasClass('active')){
+        $('li.'+id).remove();
+        $(this).removeClass('active').children().remove()
+      }else if(active_box <= 11){      
+        $('#list').append('<li class='+id+'>('+ active_box+') '+ id+'</li>')
+        $(this).addClass('active').append('<div>'+ active_box +'</div>')
+        hoverable()      
+      }
+      reInitializePosititionNumber()  
+    }
+    
+  })
+};
+
+function hoverable(){
+  $('ul#list li').on('mouseenter', function(){
+    class_id = $(this).attr('class')
+    $('.box#'+class_id).addClass('hovered')
+  }).on('mouseleave',function(){
+    class_id = $(this).attr('class')
+    $('.box#'+class_id).removeClass('hovered')    
+  })
+
+  $('.box').on('mouseenter', function(){
+    $('span#coordinat').text($(this).attr('id'))
+  }).on('mouseleave', function(){
+    $('span#coordinat').text('X,Y')
+  })
+}
+
+function reInitializePosititionNumber(){
+  $.each($('ul#list li'), function(i, elem){
+    class_id = $(this).attr('class')
+    index    = i+1
+    new_text = $(elem).text().replace(/[0-9]+/, index)
+    $(elem).text(new_text)
+    $('.box#'+class_id+' div').text(index)
+  })
+}
+
+function toYaml(){
+  if ($('.box.active').length <= 11){
+    arr=[];
+    $.each($('ul#list li'),function(index, elem){
+      text = $(elem).text().split(" ")[1]
+      arr.push((index+1)+': '+ text.replace('-', ','))
+    })
+    alert(arr.join('\n'))
+  }else{
+    alert('please input more player position, minimum 11')
+  }
+}
+
+function clearActive(){
+  $('.box.active').click()
+}
+
+function templateFromArray(arr){
+  clearActive();
+  $.each(arr,function(i,e){
+    $('#'+e).click()
+  })
+}
+
+  </script>
+  </body>
+</html>
