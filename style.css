@@ -34,4 +34,13 @@ color:rgb(230, 1, 125);
 .bg-pink{
   background-color: rgb(230, 1, 125);
 }
+table tr td, table tr th{
+  background-color: rgba(75, 75, 75, 0.05) !important;
+  color:white !important;
 
+}
+table{
+  border-width:5px;
+  border-color: rgb(255, 255, 255);
+  border-style: inset;
+}
