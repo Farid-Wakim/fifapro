@@ -1,3 +1,21 @@
+<?php
+Require("connections/DAL.php");
+session_start();
+$User_ID = $_SESSION["User_ID"];
+$User_Data_Query = "SELECT Full_Name FROM accounts_list WHERE ID = $User_ID";
+$User_Data_Result = mysqli_query($connection,$User_Data_Query);
+$User_Row = mysqli_fetch_assoc($User_Data_Result);
+
+$User_Name = $User_Row["Full_Name"];
+
+
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -13,22 +31,16 @@
 <body>
 
         <div class="p-3 title text-center display-1">FIFAPRO</div>
-<ul class="pb-3 nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Create a tournament</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Current Tournaments</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Profile</a>
-  </li>
-</ul>
+     <?php   if(isset($_SESSION["User_ID"])){
+
+include("navbar-session.php");
+
+}?>
 
         <div class="container">
 
 
-                <h1>Hello User</h1> 
+                <h1>Hello <?php echo $User_Name; ?></h1> 
                 <div class="row">
                         <div class="col-sm-12 col-md-6">
                                 <div class="row">

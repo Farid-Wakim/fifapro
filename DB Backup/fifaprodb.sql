@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 16, 2025 at 02:49 PM
+-- Generation Time: Feb 16, 2025 at 03:06 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -88,6 +88,58 @@ CREATE TABLE IF NOT EXISTS `status_list` (
 INSERT INTO `status_list` (`ID`, `Name`) VALUES
 (0, 'Inactive'),
 (1, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teams_list`
+--
+
+DROP TABLE IF EXISTS `teams_list`;
+CREATE TABLE IF NOT EXISTS `teams_list` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teams_members_matrix`
+--
+
+DROP TABLE IF EXISTS `teams_members_matrix`;
+CREATE TABLE IF NOT EXISTS `teams_members_matrix` (
+  `Team_ID` int NOT NULL,
+  `Account_ID` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tournaments_list`
+--
+
+DROP TABLE IF EXISTS `tournaments_list`;
+CREATE TABLE IF NOT EXISTS `tournaments_list` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Name` int NOT NULL,
+  `Status_ID` int NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tournaments_teams_matrix`
+--
+
+DROP TABLE IF EXISTS `tournaments_teams_matrix`;
+CREATE TABLE IF NOT EXISTS `tournaments_teams_matrix` (
+  `Tournament_ID` int NOT NULL,
+  `Team_ID` int NOT NULL,
+  `Status_ID` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
