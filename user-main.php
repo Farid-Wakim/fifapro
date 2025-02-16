@@ -9,9 +9,13 @@ $User_Row = mysqli_fetch_assoc($User_Data_Result);
 $User_Name = $User_Row["Full_Name"];
 
 
+$User_Assigned_Team_Query = "SELECT Team_ID FROM Teams_members_matrix WHERE Account_ID = $User_ID";
+$User_Assigned_Team_Result = mysqli_query($connection,$User_Assigned_Team_Query);
+$Assigned_Team_Row = mysqli_fetch_assoc($User_Assigned_Team_Result);
 
+$Team_ID = $Assigned_Team_Row["Team_ID"];
 
-
+echo $Team_ID;
 
 
 ?>
@@ -24,19 +28,15 @@ $User_Name = $User_Row["Full_Name"];
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link href="style.css" rel="stylesheet">
+        <script src="JS/Info_Fetch.js"></script>
 </head>
 
 <body>
 
         <div class="p-3 title text-center display-1">FIFAPRO</div>
-     <?php   if(isset($_SESSION["User_ID"])){
-
-include("navbar-session.php");
-
-}?>
-
+        <?php if(isset($_SESSION["User_ID"])) {include("navbar-session.php");}?>
         <div class="container">
 
 
@@ -47,11 +47,9 @@ include("navbar-session.php");
                                         <div class="col-sm-12 col-md-6">
                                                 
                                                 <h4><select name="team" id="teamSelect">
-                                                        <option value="team1">team1</option>
-                                                        <option value="team2">team2</option>
-                                                        <option value="team3">team3</option>
+
                                                 </select><button class="btn btn-danger" type="submit">Change</button></h4>
-                                                <img src="resources/images/team-fcb.jpg" class="img img-fluid">
+                                                <div id="teamImageDiv"><img src="resources/images/<?php echo $Team_ID;?>.png" class="img img-fluid"></div>
                                         </div>
                                 </div>
 

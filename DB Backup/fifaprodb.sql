@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 16, 2025 at 03:06 PM
+-- Generation Time: Feb 16, 2025 at 03:50 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -99,8 +99,17 @@ DROP TABLE IF EXISTS `teams_list`;
 CREATE TABLE IF NOT EXISTS `teams_list` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `Image_Path` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `teams_list`
+--
+
+INSERT INTO `teams_list` (`ID`, `Name`, `Image_Path`) VALUES
+(1, 'F.C. Barcelona', 'images/1.png'),
+(2, 'A.C. Milan', 'images/2.png');
 
 -- --------------------------------------------------------
 
@@ -113,6 +122,13 @@ CREATE TABLE IF NOT EXISTS `teams_members_matrix` (
   `Team_ID` int NOT NULL,
   `Account_ID` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `teams_members_matrix`
+--
+
+INSERT INTO `teams_members_matrix` (`Team_ID`, `Account_ID`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 

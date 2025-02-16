@@ -53,10 +53,17 @@ if ($Action_ID == "2"){
     
        // echo hash('sha256', $LoginPassword);
        // echo $Password;
+
+}
+
+if ($Action_ID == "3"){
+
+    $Team_ID = $_GET["Team_ID"];
+    $User_ID = $_SESSION["User_ID"];
+
+    $Update_Team_Query = "";
     
-    
-    
-    
+
 
 
 }

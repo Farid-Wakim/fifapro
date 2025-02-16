@@ -20,7 +20,20 @@ if ($Action_ID == "1"){
 }
 
 
+if ($Action_ID == "2"){
 
+
+    $Fetch_All_Teams_Query = "SELECT ID, Name, Image_Path FROM teams_list";
+    $Teams_Query = mysqli_query($connection,$Fetch_All_Teams_Query);
+    $Teams_Data = array();
+
+    while ($row = mysqli_fetch_assoc($Teams_Query)) {
+        $Teams_Data[] = $row;
+    }
+    echo json_encode($Teams_Data);
+
+
+}
 
 
 

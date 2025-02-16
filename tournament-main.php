@@ -1,3 +1,11 @@
+<?php
+Require("connections/DAL.php");
+session_start();
+
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -13,17 +21,7 @@
 <body>
 
         <div class="p-3 title text-center display-1">FIFAPRO</div>
-<ul class="pb-3 nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Create a tournament</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Current Tournaments</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Profile</a>
-  </li>
-</ul>
+        <?php if(isset($_SESSION["User_ID"])) {include("navbar-session.php");}?>
 
 
         <div class="container">
