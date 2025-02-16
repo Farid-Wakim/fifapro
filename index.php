@@ -1,25 +1,36 @@
+
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
         <head>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
                 <link href="style.css" rel="stylesheet">
+				<script src="JS/Info_Fetch.js"></script>
+				<script src="JS/home.js"></script>
         </head>
 <body>
 
 	<div class="p-3 title text-center display-1">FIFAPRO</div>
-<ul class="pb-3 nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Create a tournament</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Current Tournaments</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Profile</a>
-  </li>
-</ul>
+<?php 
+
+if(isset($_SESSION["User_ID"])){
+
+	include("navbar-session.php");
+
+}
+// else{
+
+// 	include("navbar.php");
+// }
+
+
+
+?>
 
 <div class="container py-3">
 	<div class="row">
@@ -109,18 +120,18 @@
 <div class="signup py-5 text-center" id ="signup" >
 <h2 class="py-3">Create A New Tournament/Account</h2>	
 <div class="container">
-		<form>
+		<div>
 			<div class="form-group input-group mb-5">
 				<div class="input-group-prepend">
 					<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 				 </div>
-				<input name="" class="form-control" placeholder="Full name" type="text">
+				<input name="" class="form-control" placeholder="Full name" type="text" id="input_full_name">
 			</div>
 			<div class="form-group input-group mb-5">
 				<div class="input-group-prepend">
 					<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 				 </div>
-				<input name="" class="form-control" placeholder="Email address" type="email">
+				<input name="" class="form-control" placeholder="Email address" type="email" id="input_email">
 			</div>
 			<div class="form-group input-group mb-5">
 				<div class="input-group-prepend">
@@ -132,38 +143,39 @@
 					<option value="2">+198</option>
 					<option value="3">+701</option>
 				</select>
-				<input name="" class="form-control" placeholder="Phone number" type="text">
+				<input name="" class="form-control" placeholder="Phone number" type="text" id="input_phone_number">
 			</div>
 			<div class="form-group input-group mb-5">
 				<div class="input-group-prepend">
 					<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 				</div>
-				<select class="form-control">
+				<select class="form-control" id="dropdown_account_types">
 					<option selected=""> Select account type</option>
-					<option>Admin</option>
+					<!-- <option>Admin</option>
 					<option>Coach</option>
-					<option>Viewer</option>
+					<option>Viewer</option> -->
 				</select>
 			</div> <!-- form-group end.// -->
 			<div class="form-group input-group mb-5">
 				<div class="input-group-prepend">
 					<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 				</div>
-				<input class="form-control" placeholder="Create password" type="password">
+				<input class="form-control" placeholder="Create password" type="password" id="input_password">
 			</div>
 			<div class="form-group input-group mb-5">
 				<div class="input-group-prepend">
 					<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 				</div>
-				<input class="form-control" placeholder="Repeat password" type="password">
+				<input class="form-control" placeholder="Repeat password" type="password" id="input_password_check">
 			</div>                                      
 			<div class="form-group">
-				<button type="submit" class="btn btn-pink btn-block"> Create Account  </button>
+				<button type="submit" class="btn btn-pink btn-block" id="button_register"> Create Account  </button>
 			</div>  	    
 			<p class="text-center">Have an account? <a class="font-pink" href="login.html">Log In</a> </p>                                                                 
-		</form>
+		</div>
 	</div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
